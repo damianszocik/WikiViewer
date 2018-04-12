@@ -106,6 +106,7 @@ window.addEventListener("load", ()=> {
 
 //SEARCHING AND DISPLAYING RESULTS
 elements.form.addEventListener("submit",function(el) {
+    elements.form.children[0].blur();
     el.preventDefault();
     fetchData(this.childNodes[1].value);
 });
