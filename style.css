@@ -1,0 +1,315 @@
+/* FONTS */
+
+@font-face {
+    font-family: "ProductSans";
+    src: url("fonts/ProductSansRegular.woff2") format("woff2"), url("fonts/ProductSansRegular.woff") format("woff"), url("fonts/ProductSansRegular.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ProductSans";
+    src: url("fonts/ProductSansBold.woff2") format("woff2"), url("fonts/ProductSansBold.woff") format("woff"), url("fonts/ProductSansBold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');
+/* VARIABLES $ NORMALIZE */
+
+:root {
+    --blue: #4080ea;
+    --white: #fff;
+}
+
+/* form {
+    transform-origin: 0% 0%;
+} */
+
+
+html,
+body {
+    font-size: 2vh;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: ProductSans, sans-serif;
+    overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+    border-radius: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #efefef;
+}
+
+::-webkit-scrollbar {
+    width: 0.5vh;
+}
+
+/* BASIC STYLES */
+
+#blue-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+}
+
+#logo {
+    font-weight: bold;
+    user-select: none;
+}
+
+.bg-blue {
+    background-color: var(--blue);
+}
+
+.content-white {
+    color: var(--white);
+}
+
+/* PRELOADER */
+
+#blue-container[data-state="preloader"] #logo {
+    font-size: 13rem;
+    margin: 0;
+}
+
+#blue-container[data-state="preloader"] h2 {
+    font-weight: normal;
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 0.7;
+}
+
+#blue-container[data-state="preloader"] form,
+#side-logo {
+    display: none;
+}
+
+/* SEARCH VIEW */
+
+#blue-container[data-state="search"] {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#blue-container[data-state="search"] #logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 1rem;
+    font-size: 3rem;
+}
+
+#blue-container[data-state="search"] h2 {
+    display: none;
+}
+
+#blue-container[data-state="search"] form {
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+#blue-container[data-state="search"] input {
+    font-size: 2rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(255, 255, 255, 0.6);
+    border-style: none none solid none;
+    outline: none;
+}
+
+#blue-container[data-state="search"] label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.9rem;
+    position: absolute;
+    top: 0;
+    left: 0rem;
+    z-index: -1;
+}
+
+#blue-container[data-state="search"] #side-logo {
+    display: inline;
+    position: absolute;
+    font-weight: bold;
+    right: -45vh;
+    transform: rotate(-90deg);
+    margin: 0;
+    font-size: 55vh;
+    transform-origin: 50% 50%;
+    color: rgba(255, 255, 255, 0.05);
+    user-select: none;
+}
+
+/* RESULT VIEW */
+
+#blue-container[data-state="results"] {
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    z-index: 1;
+}
+
+#blue-container[data-state="results"] #slogan {
+    display: none;
+}
+
+#blue-container[data-state="results"] form {
+    display: block;
+    position: relative;
+    z-index: 1;
+    flex-basis: 100%;
+    margin: 1rem;
+    overflow: hidden;
+}
+
+#blue-container[data-state="results"] input {
+    font-size: 1.4rem;
+    min-width: 50%;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(255, 255, 255, 0.5);
+    border-style: none none solid none;
+    outline: none;
+}
+
+#blue-container[data-state="results"] label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.3rem;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#blue-container[data-state="results"] #logo {
+    font-size: 2.8rem;
+    margin: 0.8rem;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+#blue-container[data-state="results"] #side-logo {
+    position: absolute;
+    font-weight: bold;
+    right: -45vh;
+    transform: rotate(-90deg);
+    margin: 0;
+    font-size: 55vh;
+    transform-origin: 50% 50%;
+    color: rgba(255, 255, 255, 0.05);
+    user-select: none;
+    display: none;
+}
+
+/* RESULTS-COLLAPSED VIEW */
+
+#blue-container[data-state="results-collapsed"] {
+    display: inline-block;
+    width: initial;
+    height: initial;
+    z-index: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* #blue-container[data-state="results-collapsed"]:hover {
+    display: inline-block;
+    width: initial;
+    height: initial;
+    box-shadow: 0 -14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+} */
+
+#blue-container[data-state="results-collapsed"] #logo {
+    font-size: 2.8rem;
+    margin: 0.8rem;
+    /* margin-right: 2rem; */
+}
+
+#blue-container[data-state="results-collapsed"] h2,
+form,
+#side-logo {
+    display: none;
+}
+
+/* MAIN CONTENT */
+
+#main-content {
+    padding: 1rem;
+    padding-top: 5.4rem;
+}
+
+.result-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2.5rem;
+}
+
+.result-container .result-title {
+    font-size: 1.25rem;
+    flex-basis: 35%;
+    text-align: right;
+    padding-right: 5%;
+    box-sizing: border-box;
+}
+
+.result-container .result-content {
+    font-size: 0.8rem;
+    flex-basis: 65%;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.result-container a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--blue);
+    font-size: 0.7rem;
+}
+
+#main-content hr {
+    border: 1px solid var(--blue);
+    opacity: 0.5;
+    border-top: 0;
+}
+
+/* MOBILE VIEW */
+
+@media only screen and (max-width: 768px) {
+    html,
+    body {
+        font-size: 3vw;
+        height: 100vh;
+    }
+    #blue-container[data-state="search"] label {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1224px) {
+    html,
+    body {
+        font-size: 2vw;
+        height: 100vh;
+    }
+    #blue-container[data-state="search"] label {
+        font-size: 2rem;
+    }
+}
