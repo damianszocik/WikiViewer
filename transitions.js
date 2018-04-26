@@ -6,21 +6,22 @@ import {
 export const searchToResults = (onTweenTime) => {
     return new Promise(function (resolve, reject) {
         // first 
-        let initFormBounding = elements.form.getBoundingClientRect().toJSON();
+        let initFormBounding = elements.form.getBoundingClientRect();
         // last
         elements.blueContainer.setAttribute("data-state", "results");
         let finalLogoBounding = {
             fontSize: getComputedStyle(elements.logo).fontSize,
             margin: getComputedStyle(elements.logo).margin
-        }
-        let finalFormBounding = elements.form.getBoundingClientRect().toJSON();
-        let finalInputBounding = elements.form.children[0].getBoundingClientRect().toJSON();
+        };
+        let finalVoiceSearchButtonBounding = elements.voiceSearchButton.getBoundingClientRect();
+        let finalFormBounding = elements.form.getBoundingClientRect();
+        let finalInputBounding = elements.form.children[0].getBoundingClientRect();
         finalInputBounding.fontSize = getComputedStyle(elements.form.children[0]).fontSize;
         finalInputBounding.color = getComputedStyle(elements.form.children[0]).color;
-        let finalLabelBounding = elements.form.children[1].getBoundingClientRect().toJSON();
+        let finalLabelBounding = elements.form.children[1].getBoundingClientRect();
         finalLabelBounding.fontSize = getComputedStyle(elements.form.children[1]).fontSize;
         finalFormBounding.margin = getComputedStyle(elements.form).margin;
-        let finalBlueContanerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
+        let finalBlueContanerBounding = elements.blueContainer.getBoundingClientRect();
         //invert
         elements.blueContainer.setAttribute("data-state", "search");
         //play
@@ -80,8 +81,8 @@ export const searchToResults = (onTweenTime) => {
 
 export const preloaderToSearch = (offTweenTime, onTweenTime) => {
     //first
-    let initLogoBounding = elements.logo.getBoundingClientRect().toJSON();
-    let initSloganBounding = elements.slogan.getBoundingClientRect().toJSON();
+    let initLogoBounding = elements.logo.getBoundingClientRect();
+    let initSloganBounding = elements.slogan.getBoundingClientRect();
     //last
     elements.blueContainer.setAttribute("data-state", "search");
     let finalLogoBounding = {};
@@ -90,6 +91,8 @@ export const preloaderToSearch = (offTweenTime, onTweenTime) => {
     finalLogoBounding.margin = getComputedStyle(elements.logo).margin;
     finalLogoBounding.fontSize = getComputedStyle(elements.logo).fontSize;
     finalLogoBounding.margin = getComputedStyle(elements.logo).margin;
+    let finalVoiceSearchButtonBounding = {}; 
+    finalVoiceSearchButtonBounding.opacity = getComputedStyle(elements.voiceSearchButton).opacity;
     //invert&play
     elements.blueContainer.setAttribute("data-state", "preloader");
     TweenLite.fromTo(elements.logo, offTweenTime, {
@@ -143,20 +146,31 @@ export const preloaderToSearch = (offTweenTime, onTweenTime) => {
                 onComplete: () => elements.form.children[1].removeAttribute("style"),
                 delay: 0.2
             });
+            TweenLite.fromTo(elements.voiceSearchButton, offTweenTime, {
+                opacity: 0,
+                right: "-2rem"
+            },{
+                opacity: finalVoiceSearchButtonBounding.opacity,
+                right: 0,
+                ease: Power4.easeInOut,
+                onComplete: () => elements.voiceSearchButton.removeAttribute("style"),
+                delay: 0.2
+            });
         }
     });
 }
 
 export const resultsCollapse = (onTweenTime) => {
     //first
-    let initContainerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
+    let initContainerBounding = elements.blueContainer.getBoundingClientRect();
     //last
     elements.blueContainer.setAttribute("data-state", "results-collapsed");
-    let finalContainerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
+    let finalContainerBounding = elements.blueContainer.getBoundingClientRect();
     //invert&play
     elements.blueContainer.setAttribute("data-state", "results");
     TweenLite.to(elements.blueContainer, onTweenTime, {
         width: finalContainerBounding.width,
+        height: finalContainerBounding.height,
         ease: Power4.easeInOut,
         onComplete: () => {
             elements.blueContainer.setAttribute("data-state", "results-collapsed");
@@ -179,15 +193,17 @@ export const resultsCollapse = (onTweenTime) => {
 
 export const resultsUncollapse = (onTweenTime) => {
     //first
-    let initContainerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
+    let initContainerBounding = elements.blueContainer.getBoundingClientRect();
     //last
     elements.blueContainer.setAttribute("data-state", "results");
-    let finalContainerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
+    let finalContainerBounding = elements.blueContainer.getBoundingClientRect();
     //invert&play
     TweenLite.fromTo(elements.blueContainer, onTweenTime, {
-        width: initContainerBounding.width
+        width: initContainerBounding.width,
+        height: initContainerBounding.height
     }, {
         width: finalContainerBounding.width,
+        height: finalContainerBounding.height,
         ease: Power4.easeInOut,
         onComplete: () => {
             elements.blueContainer.removeAttribute("style");
@@ -207,27 +223,27 @@ export const resultsUncollapse = (onTweenTime) => {
 
 export const resultsToSearch = (onTweenTime) => {
     // first 
-    let initFormBounding = elements.form.getBoundingClientRect().toJSON();
-    let initBlueContainerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
-    let initLogoBounding = elements.logo.getBoundingClientRect().toJSON();
-    let initInputBounding = elements.form.children[0].getBoundingClientRect().toJSON();
+    let initFormBounding = elements.form.getBoundingClientRect();
+    let initBlueContainerBounding = elements.blueContainer.getBoundingClientRect();
+    let initLogoBounding = elements.logo.getBoundingClientRect();
+    let initInputBounding = elements.form.children[0].getBoundingClientRect();
     // last
     elements.blueContainer.setAttribute("data-state", "search");
-    let finalLogoBounding = elements.logo.getBoundingClientRect().toJSON();
+    let finalLogoBounding = elements.logo.getBoundingClientRect();
     finalLogoBounding.fontSize = getComputedStyle(elements.logo).fontSize;
     finalLogoBounding.marginTop = getComputedStyle(elements.logo).marginTop;
     finalLogoBounding.marginBottom = getComputedStyle(elements.logo).marginBottom;
     finalLogoBounding.marginLeft = getComputedStyle(elements.logo).marginLeft;
     finalLogoBounding.marginRight = getComputedStyle(elements.logo).marginRight;
-    let finalFormBounding = elements.form.getBoundingClientRect().toJSON();
+    let finalFormBounding = elements.form.getBoundingClientRect();
     finalFormBounding.margin = getComputedStyle(elements.form).margin;
-    let finalInputBounding = elements.form.children[0].getBoundingClientRect().toJSON();
+    let finalInputBounding = elements.form.children[0].getBoundingClientRect();
     finalInputBounding.fontSize = getComputedStyle(elements.form.children[0]).fontSize;
     finalInputBounding.color = getComputedStyle(elements.form.children[0]).color;
-    let finalLabelBounding = elements.form.children[1].getBoundingClientRect().toJSON();
+    let finalLabelBounding = elements.form.children[1].getBoundingClientRect();
     finalLabelBounding.fontSize = getComputedStyle(elements.form.children[1]).fontSize;
     finalLabelBounding.margin = getComputedStyle(elements.logo).margin;
-    let finalBlueContanerBounding = elements.blueContainer.getBoundingClientRect().toJSON();
+    let finalBlueContanerBounding = elements.blueContainer.getBoundingClientRect();
     //invert
     elements.blueContainer.setAttribute("data-state", "results");
     TweenLite.fromTo(elements.logo, onTweenTime, {
@@ -327,3 +343,42 @@ export const animateSearchInput = () => {
         }
     });
 }
+export const listenVoiceSearchButton = (state) => {
+    TweenLite.set(elements.voiceSearchButton, {
+        transformOrigin: "50% 50%"
+    });
+    TweenLite.to(elements.voiceSearchButton, 0.3, {
+        scale: 0,
+        rotation: 360,
+        onComplete: () => {
+            let icon;
+            if (state == "start") {
+                icon = "rec";
+            } else if (state == "stop") {
+                icon = "microphone";
+            }
+            elements.voiceSearchButton.setAttribute("src", `icons\\${icon}.svg`);
+            TweenLite.to(elements.voiceSearchButton, 0.3, {
+                scale: 1,
+                rotation: 0,
+                onComplete: ()=>{
+                    elements.voiceSearchButton.removeAttribute("style");
+                }
+            });
+        }
+    });
+}
+
+export const triggerPreloader = () => {
+    let documentBody = document.body;
+    if (document.querySelector("#preloader1")) {
+        console.log("preloader exist");
+    } else {
+        console.log("preloader doesn't exist");
+    }
+}
+
+
+
+
+

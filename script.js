@@ -11,7 +11,8 @@ export const elements = {
     formLabel: document.querySelector("label"),
     searchInput: document.querySelector("input"),
     form: document.querySelector("form"),
-    sideLogo: document.querySelector("#side-logo")
+    sideLogo: document.querySelector("#side-logo"),
+    voiceSearchButton: document.querySelector("#voice-search")
 };
 window.elements = elements;
 
@@ -96,6 +97,7 @@ var injectApiResults = data => {
     };
 };
 
+
 //PRELOADER
 window.addEventListener("load", ()=> {
     if (elements.blueContainer.getAttribute("data-state") == "preloader") {
@@ -151,6 +153,56 @@ elements.blueContainer.addEventListener("mouseenter", function () {
         }, 500);
     }
 });
+
+
+//voice search
+
+try {
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var recognition = new SpeechRecognition();
+} catch (error) {
+    console.error(error);
+}
+
+recognition.onstart = function () {
+    console.log('Voice recognition activated. Try speaking into the microphone.');
+
+}
+
+recognition.onspeechend = function () {
+    console.log('You were quiet for a while so voice recognition turned itself off.');
+}
+
+recognition.onerror = function (event) {
+    transitions.listenVoiceSearchButton("stop");
+    if (event.error == 'no-speech') {
+        console.log('No speech was detected. Try again.');
+    };
+}
+
+recognition.onresult = function (event) {
+    transitions.listenVoiceSearchButton("stop");
+    elements.searchInput.focus();
+    setTimeout(() => {
+        console.log(event.results[0][0].transcript);
+        elements.searchInput.value = event.results[0][0].transcript;
+        fetchData(elements.searchInput.value);
+    }, 400);
+}
+
+elements.voiceSearchButton.addEventListener("click", () => {
+
+    
+    transitions.listenVoiceSearchButton("start");
+    recognition.start();
+});
+
+document.addEventListener("click", ()=> {
+    transitions.triggerPreloader();
+});
+
+// transitions.triggerPreloader();
+
 
 
 

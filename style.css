@@ -20,8 +20,8 @@
     --white: #fff;
 }
 
-/* form {
-    transform-origin: 0% 0%;
+/* #voice-search {
+    transform-origin: 50% 50%;
 } */
 
 
@@ -79,6 +79,23 @@ body {
 
 .content-white {
     color: var(--white);
+}
+
+#preloader {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+#preloader img {
+    height: 10vh;
 }
 
 /* PRELOADER */
@@ -142,6 +159,18 @@ body {
     top: 0;
     left: 0rem;
     z-index: -1;
+}
+
+#blue-container[data-state="search"] #voice-search {
+    height: 1.4rem;
+    opacity: 0.6;
+    position:absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
 }
 
 #blue-container[data-state="search"] #side-logo {
@@ -220,6 +249,13 @@ body {
     display: none;
 }
 
+#blue-container[data-state="results"] #voice-search {
+    height: 1.4rem;
+    opacity: 0.6;
+    margin-left: -1.5rem;
+    cursor: pointer;
+}
+
 /* RESULTS-COLLAPSED VIEW */
 
 #blue-container[data-state="results-collapsed"] {
@@ -230,17 +266,9 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-/* #blue-container[data-state="results-collapsed"]:hover {
-    display: inline-block;
-    width: initial;
-    height: initial;
-    box-shadow: 0 -14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-} */
-
 #blue-container[data-state="results-collapsed"] #logo {
     font-size: 2.8rem;
     margin: 0.8rem;
-    /* margin-right: 2rem; */
 }
 
 #blue-container[data-state="results-collapsed"] h2,
@@ -300,6 +328,22 @@ form,
     }
     #blue-container[data-state="search"] label {
         font-size: 2rem;
+    }
+    #blue-container[data-state="results"] label {
+        font-size: 1rem;
+    }
+    .result-container .result-title {
+        font-size: 1.5rem;
+
+    }
+    
+    .result-container .result-content {
+        font-size: 1rem;
+
+    }
+    
+    .result-container a {
+        font-size: 0.9rem;
     }
 }
 
