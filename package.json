@@ -4,7 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,20 @@
   },
   "homepage": "https://github.com/damianszocik/WikiViewer#readme",
   "devDependencies": {
+    "autoprefixer": "^8.4.1",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "postcss-cli": "^5.0.0",
+    "postcss-loader": "^2.1.5",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15"
-  }
+    "webpack-cli": "^2.1.2"
+  },
+  "dependencies": {}
 }

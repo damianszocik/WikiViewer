@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="icons/16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="icons/32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="icons/96.png" sizes="96x96">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dist/bundle.css">
     <title>Wiki</title>
 </head>
 
@@ -23,6 +23,7 @@
             <img id="voice-search" src="icons\microphone.svg" alt="voice search">
         </form>
         <p id="side-logo">Wiki</p>
+        <div id="lang-selector"><span id="lang-pl" class="lang-active">PL </span>/<span id="lang-en"> EN</span></div>
     </div>
 
     <!-- RESULTS -->
@@ -37,13 +38,13 @@
 
 
     <!-- SCRIPTS -->
-    <script src="transitions.js" type="module"></script>
+    <!-- <script src="transitions.js" type="module"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/CSSPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/easing/EasePack.min.js"></script>
     <script src="libs/mobile-chrome-vh-fix-master/mobile-chrome-vh-fix.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenLite.min.js"></script>
     <script src="libs/gsap-then.browser.js"></script>
-    <script src="script.js" type="module"></script>
+    <script src="dist/bundle.js"></script>
 </body>
 
 </html>

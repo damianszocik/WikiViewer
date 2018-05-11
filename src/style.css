@@ -2,13 +2,13 @@
 
 @font-face {
     font-family: "ProductSans";
-    src: url("fonts/ProductSansRegular.woff2") format("woff2"), url("fonts/ProductSansRegular.woff") format("woff"), url("fonts/ProductSansRegular.ttf") format("truetype");
+    src: url("../fonts/ProductSansRegular.woff2") format("woff2"), url("../fonts/ProductSansRegular.woff") format("woff"), url("../fonts/ProductSansRegular.ttf") format("truetype");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "ProductSans";
-    src: url("fonts/ProductSansBold.woff2") format("woff2"), url("fonts/ProductSansBold.woff") format("woff"), url("fonts/ProductSansBold.ttf") format("truetype");
+    src: url("../fonts/ProductSansBold.woff2") format("woff2"), url("../fonts/ProductSansBold.woff") format("woff"), url("../fonts/ProductSansBold.ttf") format("truetype");
     font-weight: bold;
 }
 
@@ -19,11 +19,6 @@
     --blue: #4080ea;
     --white: #fff;
 }
-
-/* #voice-search {
-    transform-origin: 50% 50%;
-} */
-
 
 html,
 body {
@@ -81,24 +76,41 @@ body {
     color: var(--white);
 }
 
+#lang-selector {
+    position: absolute;
+    font-size: 0.7rem;
+    font-family: ProducSans, sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    right: 1.7rem;
+    top: 1.7rem;
+    z-index: 1;
+    user-select: none;
+}
+
+.lang-active {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8)
+}
+
+/* PRELOADER */
+
 #preloader {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
 }
 
 #preloader img {
-    height: 10vh;
+    height: 20vh;
 }
-
-/* PRELOADER */
 
 #blue-container[data-state="preloader"] #logo {
     font-size: 13rem;
@@ -164,7 +176,7 @@ body {
 #blue-container[data-state="search"] #voice-search {
     height: 1.4rem;
     opacity: 0.6;
-    position:absolute;
+    position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
@@ -334,14 +346,10 @@ form,
     }
     .result-container .result-title {
         font-size: 1.5rem;
-
     }
-    
     .result-container .result-content {
         font-size: 1rem;
-
     }
-    
     .result-container a {
         font-size: 0.9rem;
     }
