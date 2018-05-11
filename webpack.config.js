@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
@@ -8,11 +7,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     watch: true,
-    mode: "development", //ta opcja zostanie pominięta jeżeli użyjemy npm run build
+    mode: "development",
     devtool: "source-map",
     module: {
         rules: [
-            {
+            {   //babel, used to translate from ES6
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
@@ -26,14 +25,17 @@ module.exports = {
                     }
                 }
             },
-            {
+            {   //autoprefixing css, and extracting it to bundle.css
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: ["postcss-loader"]
                 })
             },
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+            {   //url-loader, used to load fonts in css
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+                loader: 'url-loader?limit=100000' 
+            }
         ]
     },
     plugins: [
