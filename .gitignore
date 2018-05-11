@@ -1,4 +1,8 @@
+#dir
 node_modules/
 .vscode/
+
+#files
 WikiWorkspace.code-workspace
 .directory
+package-lock.json
