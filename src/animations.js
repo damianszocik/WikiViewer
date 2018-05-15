@@ -70,3 +70,35 @@ export const triggerFetchPreloader = (toggle) => {
         break;
     }
 }
+
+export const initHeaderCollapsing = () => {
+    let collapsingStatus;
+    document.body.addEventListener("scroll", function () {
+        let navHeight = elements.blueContainer.getBoundingClientRect().height;
+        let currentTopOffset = this.scrollTop;
+        if ((currentTopOffset >= navHeight / 2) && (elements.blueContainer.getAttribute("data-state") == "results") && (collapsingStatus != "during")) {
+            collapsingStatus = "during";
+            transitions.resultsCollapse(0.5);
+            setTimeout(function () {
+                collapsingStatus = "stopped";
+            }, 500);
+        } else if ((currentTopOffset < navHeight / 2) && (elements.blueContainer.getAttribute("data-state") == "results-collapsed") && (collapsingStatus != "during")) {
+            collapsingStatus = "during";
+            transitions.resultsUncollapse(0.5);
+            setTimeout(function () {
+                collapsingStatus = "stopped";
+            }, 500);
+        }
+    });
+    elements.blueContainer.addEventListener("mouseenter", function () {
+        let navHeight = elements.blueContainer.getBoundingClientRect().height;
+        let currentTopOffset = document.body.scrollTop;
+        if ((elements.blueContainer.getAttribute("data-state") == "results-collapsed") && (currentTopOffset >= navHeight / 2) && (typeof collapsingStatus === "undefined" || collapsingStatus != "during")) {
+            collapsingStatus = "during";
+            transitions.resultsUncollapse(0.5);
+            setTimeout(() => {
+                collapsingStatus = "stopped";
+            }, 500);
+        }
+    });
+}

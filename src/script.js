@@ -31,7 +31,8 @@ window.addEventListener("load", () => {
     if (elements.blueContainer.getAttribute("data-state") == "preloader") {
         transitions.preloaderToSearch(0.5, 0.5);
         animations.animateSearchInput();
-        voiceRecognition.init();
+        voiceRecognition.init(); //voice recognition initialisation
+        animations.initHeaderCollapsing();  //collapsing header initialization
     }
 });
 
@@ -42,44 +43,12 @@ elements.form.addEventListener("submit",function(el) {
     dataProcessing.fetchData(this.childNodes[1].value);
 });
 
-//LOGO CLICK GETS TO SEARCH PAGE
+//LOGO CLICK TO SEARCH PAGE
 elements.logo.addEventListener("click", () => {
     if (elements.blueContainer.getAttribute("data-state") == "results") {
         transitions.resultsToSearch(0.5);
     } else if (elements.blueContainer.getAttribute("data-state") == "results-collapsed") {
         transitions.resultsUncollapse(0.5);
-    }
-});
-
-
-// HEADER COLLAPSE
-let collapsingStatus;
-document.body.addEventListener("scroll", function () {
-    let navHeight = elements.blueContainer.getBoundingClientRect().height;
-    let currentTopOffset = this.scrollTop;
-    if ((currentTopOffset >= navHeight/2) && (elements.blueContainer.getAttribute("data-state") == "results") && (collapsingStatus != "during")) {
-        collapsingStatus = "during";
-        transitions.resultsCollapse(0.5);
-        setTimeout(function () {
-            collapsingStatus = "stopped";
-        }, 500);
-    } else if ((currentTopOffset < navHeight/2) && (elements.blueContainer.getAttribute("data-state") == "results-collapsed") && (collapsingStatus != "during")) {
-        collapsingStatus = "during";
-        transitions.resultsUncollapse(0.5);
-        setTimeout(function () {
-            collapsingStatus = "stopped";
-        }, 500);
-    }
-});
-elements.blueContainer.addEventListener("mouseenter", function () {
-    let navHeight = elements.blueContainer.getBoundingClientRect().height;
-    let currentTopOffset = document.body.scrollTop;
-    if ((elements.blueContainer.getAttribute("data-state") == "results-collapsed") && (currentTopOffset >= navHeight / 2) && (typeof collapsingStatus === "undefined" || collapsingStatus != "during")) {
-        collapsingStatus = "during";
-        transitions.resultsUncollapse(0.5);
-        setTimeout(() => {
-            collapsingStatus = "stopped";
-        }, 500);
     }
 });
 
