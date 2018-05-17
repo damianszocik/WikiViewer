@@ -339,7 +339,7 @@ form,
         height: 100vh;
     }
     #blue-container[data-state="search"] label {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
     #blue-container[data-state="results"] label {
         font-size: 1rem;
@@ -362,6 +362,6 @@ form,
         height: 100vh;
     }
     #blue-container[data-state="search"] label {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 }
