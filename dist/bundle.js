@@ -210,19 +210,21 @@ __webpack_require__(/*! ./script.js */ "./src/script.js");
 
 var lang = exports.lang = "pl";
 var fetchData = exports.fetchData = function fetchData(searchValue) {
-    animations.triggerFetchPreloader("on");
-    fetch("https://" + dataProcessing.lang + ".wikipedia.org/w/api.php?action=opensearch&limit=20&format=json&search=" + searchValue + "&origin=*").then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        if (elements.blueContainer.getAttribute("data-state") == "search") {
-            transitions.searchToResults(0.5).then(function () {
-                animations.animateSearchInput();
+    if (searchValue.length >= 1) {
+        animations.triggerFetchPreloader("on");
+        fetch("https://" + dataProcessing.lang + ".wikipedia.org/w/api.php?action=opensearch&limit=20&format=json&search=" + searchValue + "&origin=*").then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            if (elements.blueContainer.getAttribute("data-state") == "search") {
+                transitions.searchToResults(0.5).then(function () {
+                    animations.animateSearchInput();
+                    injectApiResults(data);
+                });
+            } else {
                 injectApiResults(data);
-            });
-        } else {
-            injectApiResults(data);
-        };
-    });
+            };
+        });
+    }
 };
 var injectApiResults = function injectApiResults(data) {
     if (elements.mainContent.innerText != "") {

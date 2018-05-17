@@ -1,19 +1,21 @@
 import "./script.js";
 export var lang = "pl";
 export var fetchData = (searchValue) => {
-    animations.triggerFetchPreloader("on");
-    fetch(`https://${dataProcessing.lang}.wikipedia.org/w/api.php?action=opensearch&limit=20&format=json&search=${searchValue}&origin=*`).then((response) => {
-        return response.json();
-    }).then(data => {
-        if (elements.blueContainer.getAttribute("data-state") == "search") {
-            transitions.searchToResults(0.5).then(() =>{
-                animations.animateSearchInput();
+    if (searchValue.length >= 1) {
+        animations.triggerFetchPreloader("on");
+        fetch(`https://${dataProcessing.lang}.wikipedia.org/w/api.php?action=opensearch&limit=20&format=json&search=${searchValue}&origin=*`).then((response) => {
+            return response.json();
+        }).then(data => {
+            if (elements.blueContainer.getAttribute("data-state") == "search") {
+                transitions.searchToResults(0.5).then(() => {
+                    animations.animateSearchInput();
+                    injectApiResults(data);
+                });
+            } else {
                 injectApiResults(data);
-            });
-        } else {
-            injectApiResults(data);
-        };  
-    });
+            };
+        });
+    }
 };
 var injectApiResults = data => {
     if (elements.mainContent.innerText != "") {
